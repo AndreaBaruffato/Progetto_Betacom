@@ -1,0 +1,44 @@
+public class Automobile extends Veicolo {
+	
+	private String alimentazione;
+	private Integer porte;
+	private Integer posti;
+	
+public Automobile (Integer posti, Integer porte, String alimentazione, String targa, Integer cilindrata, Integer anno_fabbricazione) {
+
+	super (targa, cilindrata, anno_fabbricazione);
+	this.posti = posti;
+	this.porte = porte;
+	this.alimentazione = alimentazione;
+		
+}
+	
+public int getPosti() {
+	return posti;
+}
+
+public void setPosti(Integer posti) {
+	this.posti = posti;
+}
+
+public int getPorte() {
+	return porte;
+}
+
+public void setPorte(Integer porte) {
+	this.porte = porte;
+}
+
+public String getAlimentazione() {
+	return alimentazione;
+}
+
+public void setAlimentazione(String alimentazione) {
+	this.alimentazione = alimentazione;
+}
+	
+@Override
+public String toString(){
+	return super.toString() + this.posti.toString() + "," + this.porte.toString() + "," +this.alimentazione.toString()+",";
+	}
+}
