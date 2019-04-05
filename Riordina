@@ -1,0 +1,20 @@
+import java.util.List;
+
+public class Riordina {
+
+		public static List<Veicolo> ordinaAnnoFab(List<Veicolo> list) { //primo
+			list.sort((x, y) -> (x.getAnno_fabbricazione().compareTo(y.getAnno_fabbricazione())));
+			return list;
+		}
+
+		public static List<Veicolo> ordinaTargaAuto(List<Veicolo> elencoAuto) { //quarto
+			elencoAuto.sort((x, y) -> (x.getTarga().compareTo(y.getTarga())));
+			return elencoAuto;
+		}
+
+		public static List<Veicolo> ordinaTargaMoto(List<Veicolo> elencoMoto) { //quinto
+			elencoMoto.sort((x, y) -> (x.getTarga().compareTo(y.getTarga())));
+			return elencoMoto;
+		}
+
+}
