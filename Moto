@@ -1,0 +1,35 @@
+public class Moto extends Veicolo {
+
+	private Integer tempi;
+	private Integer rapporti;
+	
+	public Moto (Integer tempi, Integer rapporti, String targa, Integer cilindrata, Integer anno_fabbricazione) {
+		
+		super (targa, cilindrata, anno_fabbricazione);
+		this.tempi = tempi;
+		this.rapporti = rapporti;
+		
+	}
+	
+	public int getTempi() {
+		return tempi;
+	}
+
+	public void setTempi(int tempi) {
+		this.tempi = tempi;
+	}
+
+	public int getRapporti() {
+		return rapporti;
+	}
+
+	public void setRapporti(int rapporti) {
+		this.rapporti = rapporti;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ","+","+","+this.tempi.toString()+","+ this.rapporti.toString();
+	}
+
+}
