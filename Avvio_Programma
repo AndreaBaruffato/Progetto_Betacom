@@ -1,0 +1,191 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class AvvioProgramma {
+
+	public static void main(String[] args) throws IOException {
+			
+			String targa = null;
+			Integer cilindrata = null;
+			Integer anno_fabbricazione = null;
+			String alimentazione = null;
+			Integer porte = null;
+			Integer posti = null;
+			Integer tempi = null;
+			Integer rapporti = null;
+			List<Veicolo> list = new ArrayList<>();
+			List<Veicolo> autoGpl = new ArrayList<>();
+			List<Veicolo> autoPosti = new ArrayList<>();
+			List<Veicolo> annoDispari = new ArrayList<>();
+			List<Veicolo> elencoMoto = new ArrayList <>();
+			List<Veicolo> elencoAuto = new ArrayList<>();
+			Scanner tastiera = new Scanner (System.in);
+			System.out.println("Quanti veicoli vuoi inserire?");
+			int dimensione = tastiera.nextInt();
+			tastiera.nextLine();
+			String scelta = null;
+			int i = 0;
+			
+			while(i < dimensione) {
+				System.out.println("Quale veicolo vuoi inserire?");
+				scelta = tastiera.nextLine();
+				
+				if(scelta.equals("a")) {
+					System.out.println("Hai scelto l'automobile\nInserisci alimentazione: ");
+					alimentazione = tastiera.nextLine();
+					System.out.println("Inserisci il numero delle porte: ");
+					porte = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci il numero di posti: ");
+					posti = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci la targa: ");
+					targa = tastiera.nextLine();
+					System.out.println("Inserisci la cilindrata: ");
+					cilindrata = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci l'anno di fabbricazione");
+					anno_fabbricazione = tastiera.nextInt();
+					tastiera.nextLine();
+					
+					if(alimentazione.equals("gpl")) {
+						autoGpl.add(new Automobile (posti, porte, alimentazione, targa, cilindrata, anno_fabbricazione));
+					}
+	
+					if(posti>4) {
+						autoPosti.add(new Automobile (posti, porte, alimentazione, targa, cilindrata, anno_fabbricazione));
+						}
+					
+					if(anno_fabbricazione%2==1) {
+						annoDispari.add(new Automobile(posti, porte, alimentazione, targa, cilindrata, anno_fabbricazione));
+					}
+					
+					list.add(new Automobile (posti, porte, alimentazione, targa, cilindrata, anno_fabbricazione));
+					elencoAuto.add(new Automobile(posti, porte, alimentazione, targa, cilindrata, anno_fabbricazione));
+					i++;
+					
+					}
+			
+				else if(scelta.equals("m")) {
+					System.out.println("Hai scelto la moto\nInserisci il numero di tempi: ");
+					tempi = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci il numero di rapporti: ");
+					rapporti = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci la targa: ");
+					targa = tastiera.nextLine();
+					System.out.println("Inserisci la cilindrata: ");
+					cilindrata = tastiera.nextInt();
+					tastiera.nextLine();
+					System.out.println("Inserisci l'anno di fabbricazione: ");
+					anno_fabbricazione = tastiera.nextInt();
+					tastiera.nextLine();
+					
+					if(anno_fabbricazione%2==1) {
+						annoDispari.add(new Moto(tempi, rapporti, targa, cilindrata, anno_fabbricazione));
+					}
+					
+					list.add(new Moto(tempi, rapporti, targa, cilindrata, anno_fabbricazione));
+					elencoMoto.add(new Moto(tempi, rapporti, targa, cilindrata, anno_fabbricazione));
+					i++;
+					}
+				
+				else {
+					System.out.println("Riprovare");
+					}
+			}
+				
+			list = ConsegneEsercizio.stampaVeicoli(list);
+			autoGpl = ConsegneEsercizio.controlloAlimentazione(autoGpl);
+			autoPosti = ConsegneEsercizio.numeroPosti(autoPosti);
+			annoDispari = ConsegneEsercizio.controlloAnnoDispari(annoDispari);
+			elencoMoto = ConsegneEsercizio.motoCensite(elencoMoto);
+			
+			File file7 = new File ("E:\\Corso Java\\OrdineAnnoFabbricazione.csv");
+			BufferedWriter bufferedWriter7 = null;
+			
+			try {	//ordinaAnnoFab
+				
+				bufferedWriter7 = new BufferedWriter (new FileWriter(file7));
+				System.out.println(list.toString());
+				bufferedWriter7.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE,TEMPI,RAPPORTI\n");
+				for(Veicolo veicolo:Riordina.ordinaAnnoFab(list)) {
+					if(veicolo instanceof Automobile) {
+						String string = String.format("%s,%d,%d,%d,%d,%s",veicolo.getTarga(),veicolo.getCilindrata(),veicolo.getAnno_fabbricazione(),((Automobile)veicolo).getPosti(),((Automobile)veicolo).getPorte(),((Automobile)veicolo).getAlimentazione());
+						bufferedWriter7.write(string);	
+						bufferedWriter7.newLine();
+						}
+					else if(veicolo instanceof Moto){
+						String string2 = String.format("%s,%d,%d,,,,%d,%d",veicolo.getTarga(),veicolo.getCilindrata(),veicolo.getAnno_fabbricazione(),((Moto)veicolo).getTempi(),((Moto)veicolo).getRapporti());
+						bufferedWriter7.write(string2);
+						bufferedWriter7.newLine();
+					}
+				}
+				
+				}catch(IOException e7) {
+						e7.printStackTrace();
+					}
+			finally {
+				if(bufferedWriter7!=null)
+					try {
+						bufferedWriter7.close();
+						} catch(IOException e7) {
+							e7.printStackTrace();
+							}
+					}
+			
+			File file8 = new File ("E:\\Corso Java\\OrdineTargaAuto.csv");
+			BufferedWriter bufferedWriter8 = null;
+			
+			try { //ordinaTargaAuto
+				bufferedWriter8 = new BufferedWriter (new FileWriter(file8));
+				System.out.println(elencoAuto.toString());
+				bufferedWriter8.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE\n");
+				for(Veicolo veicolo:Riordina.ordinaTargaAuto(elencoAuto)) {
+					String string3 = String.format("%s,%d,%d,%d,%d,%s",veicolo.getTarga(),veicolo.getCilindrata(),veicolo.getAnno_fabbricazione(),((Automobile)veicolo).getPosti(),((Automobile)veicolo).getPorte(),((Automobile)veicolo).getAlimentazione());
+					bufferedWriter8.write(string3);
+					bufferedWriter8.newLine();
+					}
+				}catch(IOException e8) {
+					e8.printStackTrace();
+				}
+			finally {
+				if(bufferedWriter8!=null) {
+					try {
+						bufferedWriter8.close();
+					}catch(IOException e8) {
+						e8.printStackTrace();
+					}
+				}
+			}
+			
+			File file9 = new File ("E:\\Corso Java\\OrdineTargaMoto.csv");
+			BufferedWriter bufferedWriter9 = null;
+			
+			try { //ordinaTargaMoto
+				bufferedWriter9 = new BufferedWriter (new FileWriter(file9));
+				System.out.println(elencoMoto.toString());
+				bufferedWriter9.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,TEMPI,RAPPORTI\n");
+				for(Veicolo veicolo:Riordina.ordinaTargaMoto(elencoMoto)) {
+					String string4 = String.format("%s,%d,%d,%d,%d",veicolo.getTarga(),veicolo.getCilindrata(),veicolo.getAnno_fabbricazione(),((Moto)veicolo).getTempi(),((Moto)veicolo).getRapporti());
+					bufferedWriter9.write(string4);
+					bufferedWriter9.newLine();
+					}
+				}catch(IOException e9) {
+					e9.printStackTrace();
+				}
+			finally {
+				if(bufferedWriter9!=null) {
+					try {
+						bufferedWriter9.close();
+					}catch(IOException e9) {
+						e9.printStackTrace();
+					}
+				}
+			}
+	}
+
+}			
