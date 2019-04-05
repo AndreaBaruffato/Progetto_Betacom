@@ -1,0 +1,156 @@
+import java.util.List;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ConsegneEsercizio {
+
+	public static List<Veicolo> stampaVeicoli (List<Veicolo> list) {
+		
+		File file = new File ("E:\\Corso Java\\Progetto.csv");
+		BufferedWriter bufferedWriter = null;
+	
+		try {	
+			bufferedWriter = new BufferedWriter (new FileWriter(file));
+			System.out.println(list.toString());
+			bufferedWriter.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE,TEMPI,RAPPORTI\n");
+		
+			for(Veicolo veicolo:list) {
+				bufferedWriter.write(veicolo.toString());	
+				bufferedWriter.newLine();
+				}
+			}catch(IOException e) {
+				e.printStackTrace();
+				}
+		finally {
+			if(bufferedWriter!=null)
+				try {
+					bufferedWriter.close();
+					}catch(IOException e) {
+						e.printStackTrace();
+						}
+		}
+		
+		return list;
+		
+	}
+		
+		public static List<Veicolo> controlloAlimentazione (List<Veicolo> autoGpl){
+		
+			File file2 = new File ("E:\\Corso Java\\Gpl.csv");
+			BufferedWriter bufferedWriter2 = null;
+			
+			try {	//autoGpl
+				bufferedWriter2 = new BufferedWriter (new FileWriter(file2));
+				System.out.println(autoGpl.toString());
+				bufferedWriter2.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE\n");
+				for(Veicolo veicolo:autoGpl) {
+					bufferedWriter2.write(veicolo.toString());	
+					bufferedWriter2.newLine();
+					}
+				}catch(IOException e2) {
+						e2.printStackTrace();
+					}
+			finally {
+				if(bufferedWriter2!=null)
+					try {
+						bufferedWriter2.close();
+						}catch(IOException e2) {
+							e2.printStackTrace();
+							}
+					}
+		
+		return autoGpl;
+		
+		}
+		
+		public static List<Veicolo> numeroPosti (List<Veicolo> autoPosti){
+			
+			File file3 = new File ("E:\\Corso Java\\Posti.csv");
+			BufferedWriter bufferedWriter3 = null;
+			
+			try {	//autoPosti
+				bufferedWriter3 = new BufferedWriter (new FileWriter(file3));
+				System.out.println(autoPosti.toString());
+				bufferedWriter3.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE\n");
+				for(Veicolo veicolo:autoPosti) {
+					bufferedWriter3.write(veicolo.toString());	
+					bufferedWriter3.newLine();
+					}
+				}catch(IOException e3) {
+						e3.printStackTrace();
+					}
+			finally {
+				if(bufferedWriter3!=null)
+					try {
+						bufferedWriter3.close();
+						}catch(IOException e3) {
+							e3.printStackTrace();
+							}
+					}
+			
+			return autoPosti; 
+			
+		}
+		
+		public static List<Veicolo> controlloAnnoDispari (List<Veicolo> annoDispari){
+			
+			File file4 = new File ("E:\\Corso Java\\AnnoDispari.csv");
+			BufferedWriter bufferedWriter4 = null;
+			
+			try {	//annoDispari
+				
+				bufferedWriter4 = new BufferedWriter (new FileWriter(file4));
+				System.out.println(annoDispari.toString());
+				bufferedWriter4.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE,TEMPI,RAPPORTI\n");
+				for(Veicolo veicolo:annoDispari) {
+					bufferedWriter4.write(veicolo.toString());	
+					bufferedWriter4.newLine();
+					}
+				}catch(IOException e4) {
+						e4.printStackTrace();
+					}
+			finally {
+				if(bufferedWriter4!=null)
+					try {
+						bufferedWriter4.close();
+						} catch(IOException e4) {
+							e4.printStackTrace();
+							}
+					}
+			
+			return annoDispari;
+			
+		}
+		
+		public static List<Veicolo> motoCensite (List<Veicolo> elencoMoto){
+			
+			File file5 = new File ("E:\\Corso Java\\ListaMoto.csv");
+			BufferedWriter bufferedWriter5 = null;
+			
+			try {	//elencoMoto
+				
+				bufferedWriter5 = new BufferedWriter (new FileWriter(file5));
+				System.out.println(elencoMoto.toString());
+				bufferedWriter5.write("TARGA,CILINDRATA,ANNO DI FABBRICAZIONE,POSTI,PORTE,ALIMENTAZIONE,TEMPI,RAPPORTI\n");
+				for(Veicolo veicolo:elencoMoto) {
+					bufferedWriter5.write(veicolo.toString());	
+					bufferedWriter5.newLine();
+					}
+				}catch(IOException e5) {
+						e5.printStackTrace();
+					}
+			finally {
+				if(bufferedWriter5!=null)
+					try {
+						bufferedWriter5.close();
+						} catch(IOException e5) {
+							e5.printStackTrace();
+							}
+					}
+			
+			return elencoMoto;
+			
+		}
+	}
